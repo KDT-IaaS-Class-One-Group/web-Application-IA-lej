@@ -1,4 +1,1 @@
-const textBox = document.getElementById('textInput');
-const submit = document.getElementById('submit');
-
-console.log (textBox.value)
+const btn = document.getElementById('button');
