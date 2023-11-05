@@ -29,8 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
       status: "Online",
       avatar: "👤"
     };
-  
-    inputAndButton.innerHTML = `
+
+    const makediv=document.createElement("div")
+    inputAndButton.appendChild(makediv)
+    makediv.innerHTML = `
       <div class="user-info">
         <div class="avatar">${userInfo.avatar}</div>
         <div class="name">${userInfo.name}</div>
