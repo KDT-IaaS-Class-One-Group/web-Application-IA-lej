@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonElement = document.querySelector("#inputAndButton button");
     const chatHistory = document.getElementById("chatHistory");
     const rightBar = document.getElementById("rightBar");
-    
+    const inputAndButton = document.getElementById("inputAndButton")
     // 햄버거 메뉴 토글 기능
     let isMenuOpen = false;
     hamburgerMenuIcon.addEventListener("click", () => {
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       avatar: "👤"
     };
   
-    rightBar.innerHTML = `
+    inputAndButton.innerHTML = `
       <div class="user-info">
         <div class="avatar">${userInfo.avatar}</div>
         <div class="name">${userInfo.name}</div>
