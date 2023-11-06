@@ -72,3 +72,16 @@
     width: 10vw;
     height: 12vh;
 }
+
+li{
+    font-size: 1rem;
+    list-style: none;
+}
+
+.menu-container {
+    position: relative;
+}
+.menu-container>ul{
+    position: absolute;
+    left: 43vw;
+}
