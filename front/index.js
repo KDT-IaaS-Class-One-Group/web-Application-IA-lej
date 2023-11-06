@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const hamburgerMenuIcon = document.querySelector(".fa-bars");
+  const hamburgerMenuIcon = document.getElementById("hamburgerMenu");
   const topAppbar = document.getElementById("topAppbar");
   const inputElement = document.querySelector("#inputAndButton input");
   const buttonElement = document.querySelector("#inputAndButton button");
@@ -7,12 +7,48 @@ document.addEventListener("DOMContentLoaded", () => {
   const rightBar = document.getElementById("rightBar");
   const inputAndButton = document.getElementById("inputAndButton");
 
+  //햄버거 버튼 구성을 위한 요소들
+  const menuButton = document.createElement("button");
+  const menuContainer = document.createElement("div");
+  menuContainer.className = "menu-container";
+  const menuList = document.createElement("ul");
+  menuList.className = "menu-list";
+
   // 햄버거 메뉴 토글 기능
   let isMenuOpen = false;
+
+  // 햄버거 메뉴 클릭 이벤트 처리
   hamburgerMenuIcon.addEventListener("click", () => {
     isMenuOpen = !isMenuOpen;
-    topAppbar.style.display = isMenuOpen ? "block" : "none";
-  });
+    // 토글 메뉴 상태에 따라 메뉴를 표시 또는 숨깁니다.
+    if (isMenuOpen) {
+      // 메뉴를 열 때
+      topAppbar.style.display = "block";
+      menuButton.style.display = "block";
+      fetch("test.json")
+      .then((response) => response.json())
+      .then((data) => {
+        // 메뉴 항목 생성 및 추가
+        data.header.hamburgerMenu.forEach((menuItem) => {
+          const li = document.createElement("li");
+          li.textContent = menuItem;
+          menuList.appendChild(li);
+        });
+      })
+      .catch((error) => {
+        console.error("Failed to load menu items:", error);
+      });
+
+    menuContainer.appendChild(menuList);
+    topAppbar.appendChild(menuContainer);
+  } else {
+    // 메뉴를 닫을 때
+    topAppbar.style.display = "none";
+    menuButton.style.display = "none";
+    menuContainer.innerHTML = "";
+  }
+});
+
 
   // 메시지 추가 함수
   function appendMessage(type, message, timestamp) {
@@ -35,10 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // JSON에서 로고 정보 가져오기
       const logo = data.header.logo;
 
-      // 로고 추가
+      // 로고를 나타내는 Div 생성
       const logoElement = document.createElement('div');
-      logoElement.innerText = logo;
       topAppbar.appendChild(logoElement);
+      logoElement.innerText = logo;
 
       // 예시 메시지 추가
       const exampleMessages = data.mainContent.inputRecords;
