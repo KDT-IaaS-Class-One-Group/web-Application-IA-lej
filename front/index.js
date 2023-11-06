@@ -96,18 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 예시 메시지 추가
       const exampleMessages = data.mainContent.inputRecords;
-
-      //* json 파일에서 예시 메세지를 동적으로 가져옴
-
-      exampleMessages.forEach((message) => {
-        appendMessage(message.type, message.message, message.timestamp);
-      });
     })
     .catch((error) => {
       console.error('Failed to load JSON file:', error);
     });
 
-  //* div 생성 inputandbutton 자식요소로 생성
   const makediv = document.createElement('div');
   inputAndButton.appendChild(makediv);
 
@@ -147,11 +140,14 @@ document.addEventListener('DOMContentLoaded', () => {
           .then((data) => {
             // 가져온 데이터를 처리하고 오른쪽 바에 표시
             const chatRecords = data.mainContent.inputRecords;
+            const rightBar = document.getElementById('rightBar');
 
             // 오른쪽 바를 초기화하고 채팅 기록을 표시
             rightBar.innerHTML = '';
             chatRecords.forEach((record) => {
               const messageElement = document.createElement('div');
+
+              messageElement.style.color = 'white';
               messageElement.classList.add(record.type);
               messageElement.innerText = `${record.message} `;
               rightBar.appendChild(messageElement);
