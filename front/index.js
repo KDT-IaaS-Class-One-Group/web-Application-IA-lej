@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // 토글 메뉴 상태에 따라 메뉴를 표시 또는 숨깁니다.
     if (isMenuOpen) {
       // 메뉴를 열 때
-      topAppbar.style.display = "block";
       menuButton.style.display = "block";
       fetch("test.json")
       .then((response) => response.json())
@@ -43,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
     topAppbar.appendChild(menuContainer);
   } else {
     // 메뉴를 닫을 때
-    topAppbar.style.display = "none";
     menuButton.style.display = "none";
     menuContainer.innerHTML = "";
   }
