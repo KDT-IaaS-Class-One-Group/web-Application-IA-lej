@@ -16,7 +16,7 @@
 }
 #topAppbar>div{
     position: absolute;
-    left: 50vw;
+    left: 45vw;
     font-size: 3rem;
 }
 
@@ -33,6 +33,10 @@
     height: 100%;  
     background-color:#333;
     color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 }
 #rightBar {
     width: 10vw ;
