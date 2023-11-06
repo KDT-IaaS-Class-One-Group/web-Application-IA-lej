@@ -12,6 +12,12 @@
     justify-content: end;
     align-items: center;
     padding-right: 30px;
+    position: relative;
+}
+#topAppbar>div{
+    position: absolute;
+    left: 50vw;
+    font-size: 3rem;
 }
 
 #middleBody {
