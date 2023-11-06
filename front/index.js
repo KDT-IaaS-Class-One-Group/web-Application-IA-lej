@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const chatHistory = document.getElementById("chatHistory");
     const rightBar = document.getElementById("rightBar");
     const inputAndButton = document.getElementById("inputAndButton")
+
+    const logo = document.createElement('div')
+    topAppbar.appendChild(logo);
+    
+    
     // 햄버거 메뉴 토글 기능
     let isMenuOpen = false;
     hamburgerMenuIcon.addEventListener("click", () => {
