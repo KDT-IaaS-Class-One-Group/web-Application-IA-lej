@@ -108,6 +108,36 @@ document.addEventListener("DOMContentLoaded", () => {
       // 서버로 메시지 전송 및 서버 응답 처리
       // 서버로의 POST 요청 및 데이터 저장 (JSON 파일) 로직 추가
       // 서버로부터 응답을 받아와서 오른쪽 입력 기록창에 추가 (GET 요청) 로직 추가
+      function fetchChatHistory() {
+        fetch("/message")
+          .then((response) => {
+            if (response.ok) {
+              return response.json(); // JSON 응답을 파싱
+            } else {
+              throw new Error("Failed to fetch chat history");
+            }
+          })
+          .then((data) => {
+            // 가져온 데이터를 처리하고 오른쪽 바에 표시
+            const chatRecords = data.mainContent.inputRecords;
+            const rightBar = document.getElementById("rightBar");
+      
+            // 오른쪽 바를 초기화하고 채팅 기록을 표시
+            rightBar.innerHTML = "";
+            chatRecords.forEach((record) => {
+              const messageElement = document.createElement("div");
+              messageElement.classList.add(record.type);
+              messageElement.innerText = `${record.message} `;
+              rightBar.appendChild(messageElement);
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+      
+      // 초기화: 페이지가 로드될 때 채팅 기록을 가져옴
+      fetchChatHistory();
     }
   });
 });
