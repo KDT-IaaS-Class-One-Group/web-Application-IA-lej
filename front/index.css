@@ -46,8 +46,9 @@
     background-color: gray;
     display: flex;
     justify-content: end;
-    align-items: center;
+    align-items:center;
     position: relative;
+    color: white;
 }
 .textbox { 
     width: 80vw;
@@ -59,7 +60,8 @@
 
 #inputAndButton>div{
     position: absolute;
-    left: 10px;
+    left: 30px;
+
 }
 
 .button{
