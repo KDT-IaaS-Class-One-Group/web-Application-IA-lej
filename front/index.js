@@ -138,13 +138,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           })
           .then((data) => {
-            // 가져온 데이터를 처리하고 오른쪽 바에 표시
+            //* data.json 에 등록 되어 있는 메시지 rightbar에 출력
             const chatRecords = data.mainContent.inputRecords;
-            const rightBar = document.getElementById('rightBar');
 
-            // 오른쪽 바를 초기화하고 채팅 기록을 표시
+            // * 오른쪽 바를 초기화하고 채팅 기록을 표시
             rightBar.innerHTML = '';
             chatRecords.forEach((record) => {
+              //* div 생성
               const messageElement = document.createElement('div');
 
               messageElement.style.color = 'white';
