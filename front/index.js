@@ -126,40 +126,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 서버로 메시지 전송 및 서버 응답 처리
       // 서버로의 POST 요청 및 데이터 저장 (JSON 파일) 로직 추가
-      // *  서버로부터 응답을 받아와서 오른쪽 입력 기록창에 추가 (GET 요청) 로직 추가
-      function fetchChatHistory() {
-        fetch('/message')
-          .then((response) => {
-            //* response.ok를 사용하면 HTTP 요청이 성공인지 또는 실패인지 쉽게 판단이 가능하다
-            if (response.ok) {
-              return response.json(); // JSON 응답을 파싱
-            } else {
-              throw new Error('Failed to fetch chat history');
-            }
-          })
-          .then((data) => {
-            //* data.json 에 등록 되어 있는 메시지 rightbar에 출력
-            const chatRecords = data.mainContent.inputRecords;
-
-            // * 오른쪽 바를 초기화하고 채팅 기록을 표시
-            rightBar.innerHTML = '';
-            chatRecords.forEach((record) => {
-              //* div 생성
-              const messageElement = document.createElement('div');
-
-              messageElement.style.color = 'white';
-              messageElement.classList.add(record.type);
-              messageElement.innerText = `${record.message} `;
-              rightBar.appendChild(messageElement);
-            });
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-      }
-
-      // 초기화: 페이지가 로드될 때 채팅 기록을 가져옴
-      fetchChatHistory();
+      fetch('/message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userMessage }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.text(); // 성공 시 메시지 반환
+          } else {
+            throw new Error('Failed to send message to the server');
+          }
+        })
+        .then((message) => {
+          console.log(message); // 서버로부터의 응답 메시지 (예: "Message saved successfully")
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
   });
+  // *  서버로부터 응답을 받아와서 오른쪽 입력 기록창에 추가 (GET 요청) 로직 추가
+  function fetchChatHistory() {
+    fetch('/message')
+      .then((response) => {
+        //* response.ok를 사용하면 HTTP 요청이 성공인지 또는 실패인지 쉽게 판단이 가능하다
+        if (response.ok) {
+          return response.json(); // JSON 응답을 파싱
+        } else {
+          throw new Error('Failed to fetch chat history');
+        }
+      })
+      .then((data) => {
+        //* data.json 에 등록 되어 있는 메시지 rightbar에 출력
+        const chatRecords = data.mainContent.inputRecords;
+
+        // * 오른쪽 바를 초기화하고 채팅 기록을 표시
+        rightBar.innerHTML = '';
+        chatRecords.forEach((record) => {
+          //* div 생성
+          const messageElement = document.createElement('div');
+
+          messageElement.style.color = 'white';
+          messageElement.classList.add(record.type);
+          messageElement.innerText = `${record.message} `;
+          rightBar.appendChild(messageElement);
+        });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  // 초기화: 페이지가 로드될 때 채팅 기록을 가져옴
+  fetchChatHistory();
 });
