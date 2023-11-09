@@ -11,7 +11,10 @@ const DATA_FILE = path.join(__dirname, 'data.json'); // 데이터를 저장할 J
 
 // 초기화: 데이터 파일이 없으면 빈 객체로 초기화
 if (!fs.existsSync(DATA_FILE)) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify({ mainContent: { inputRecords: [] } }, null, 2));
+  fs.writeFileSync(
+    DATA_FILE,
+    JSON.stringify({ mainContent: { inputRecords: [] } }, null, 2)
+  );
 }
 
 // POST 요청 처리
@@ -24,6 +27,17 @@ app.post('/message', (req, res) => {
       res.status(500).send('Internal Server Error');
       return;
     }
+
+    // GET 요청 처리
+    app.get('/message', (req, res) => {
+      fs.readFile(DATA_FILE, 'utf8', (err, data) => {
+        if (err) {
+          res.status(500).send('Internal Server Error');
+        } else {
+          res.status(200).json(JSON.parse(data));
+        }
+      });
+    });
 
     const jsonData = JSON.parse(data);
     jsonData.mainContent.inputRecords.push({
