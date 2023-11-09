@@ -1,0 +1,16 @@
+{
+  "mainContent": {
+    "inputRecords": [
+      {
+        "type": "user",
+        "message": "안농",
+        "timestamp": "오전 10:39:40"
+      },
+      {
+        "type": "user",
+        "message": "아 되네 이전 기록!",
+        "timestamp": "오전 10:44:33"
+      }
+    ]
+  }
+}
